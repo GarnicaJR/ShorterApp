@@ -61,7 +61,13 @@ public class HomeController {
 		
 		if(urlFromEncoded.isPresent()) {
 			//httpServletResponse.setHeader("Location", "https://www.google.com");
-			httpServletResponse.setHeader("Location", "http://"+urlFromEncoded.get().getUrl());
+			
+			if(urlFromEncoded.get().getUrl().contains("http")) {
+				httpServletResponse.setHeader("Location", urlFromEncoded.get().getUrl());
+			}
+			else {
+				httpServletResponse.setHeader("Location", "http://"+urlFromEncoded.get().getUrl());
+			}
 			httpServletResponse.setStatus(302);
 		}
 		else {			
